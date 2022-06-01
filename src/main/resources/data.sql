@@ -1,2 +1,2 @@
-insert into product values (1, '123456789', 100);
-insert into product values (1, '987654321', 200);
+insert into shop.product (product_identifier, amount) values ('123456789', 100);
+insert into shop.product (product_identifier, amount) values ('987654321', 200);
