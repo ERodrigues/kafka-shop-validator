@@ -10,6 +10,8 @@ import org.springframework.kafka.annotation.KafkaListener;
 import org.springframework.kafka.core.KafkaTemplate;
 import org.springframework.stereotype.Service;
 
+import java.util.List;
+
 @Slf4j
 @Service
 @RequiredArgsConstructor
@@ -54,7 +56,11 @@ public class ReceiveKafkaMessage {
     }
 
     private boolean isValidShop(ShopItemDto itemDto, Product product) {
-        return product != null || product.getAmount() >= itemDto.getAmount();
+        if (product == null){
+            return false;
+        }
+
+        return product.getAmount() >= itemDto.getAmount();
     }
 
 }
