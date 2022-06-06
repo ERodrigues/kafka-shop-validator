@@ -18,7 +18,7 @@ import java.util.Map;
 
 @Configuration
 public class KafkaConfig {
-    @Value(value = "${kafka.bootstrap.Address:172.19.246.131:9092}")
+    @Value("${spring.kafka.bootstrap-servers}")
     private String bootStrapAddress;
     private Map<String, Object> properties;
 
@@ -27,6 +27,7 @@ public class KafkaConfig {
         properties.put(ProducerConfig.BOOTSTRAP_SERVERS_CONFIG, bootStrapAddress);
         properties.put(ProducerConfig.KEY_SERIALIZER_CLASS_CONFIG, StringSerializer.class);
         properties.put(ProducerConfig.VALUE_SERIALIZER_CLASS_CONFIG, JsonSerializer.class);
+        properties.put(JsonSerializer.ADD_TYPE_INFO_HEADERS, false);
         properties.put(ProducerConfig.CLIENT_ID_CONFIG, "shop-api");
 
         return new DefaultKafkaProducerFactory<>(properties);
